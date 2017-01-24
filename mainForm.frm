@@ -15,7 +15,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Private Sub CommandButton2_Click()
-    mainForm.Hide
+    'Check for Templates subfolder
+    If Dir(mainForm.TextBox2.Value & "\Templates\", vbDirectory) = "" Then
+        MsgBox ("Template folder not found - correct Path and try again")
+        mainForm.ComboBox1.Clear
+    Else
+        mainForm.Hide
+    End If
 End Sub
 
 
@@ -28,10 +34,12 @@ Private Sub CommandButton3_Click()
         .AllowMultiSelect = False
         .InitialFileName = "C:\Users\"
         .Show
-        filePath = .SelectedItems(1)
     End With
-    mainForm.TextBox2.Value = filePath
     
+    'Update file path (TODO: catch Dialog cancel)
+    filePath = fldr.SelectedItems(1)
+    mainForm.TextBox2.Value = filePath
+        
     'Fetch templates names (*.docx) & fill combobox
     fileName = Dir(filePath & "\Templates\" & "*.docx")
     Do While fileName <> ""

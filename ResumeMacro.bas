@@ -15,29 +15,22 @@ Sub autoPublish()
     'Reset userform combo box
     mainForm.ComboBox1.Clear
 
-    'Define path variables
-
+    'Attempt to fill combobox without file dialog
     If mainForm.TextBox2.Value <> "" Then
-
-        'TODO add Template folder checks
-        fileName = Dir(filePath & "Templates\" & "*.docx")
-
+        fileName = Dir(mainForm.TextBox2.Value & "\Templates\" & "*.docx")
         'Fetch templates names (*.docx) & fill combobox
         Do While fileName <> ""
             mainForm.ComboBox1.AddItem Left(fileName, Len(fileName) - 5)
             fileName = Dir()
         Loop
-
     End If
 
     'Open form for user input
     mainForm.Show
 
-
+    'Check if file to publish is open and in focus
     filePath = mainForm.TextBox2.Value
     fileName = filePath & "\Templates\" & mainForm.ComboBox1.Value & ".docx"
-
-    'Check if file to publish is open and in focus
     If ActiveDocument.Name = (mainForm.ComboBox1.Value & ".docx") Then
     Else
         Documents.Open(fileName).Activate
@@ -83,3 +76,5 @@ Sub autoPublish()
         ActiveDocument.Close (wdDoNotSaveChanges)
     End If
 End Sub
+
+
