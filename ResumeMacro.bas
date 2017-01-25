@@ -36,6 +36,7 @@ Sub autoPublish()
         Documents.Open(fileName).Activate
     End If
 
+    'Update company name
     ActiveDocument.BuiltInDocumentProperties(wdPropertyCompany) = mainForm.TextBox1.Value
     newName = mainForm.TextBox1.Value
     ActiveDocument.Save
@@ -74,5 +75,5 @@ Sub autoPublish()
     If mainForm.CheckBox1.Value Then
         ActiveDocument.Close (wdDoNotSaveChanges)
     End If
-    
+
 End Sub
