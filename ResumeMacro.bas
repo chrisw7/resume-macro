@@ -41,8 +41,8 @@ Sub autoPublish()
     ActiveDocument.Save
 
     'Determine which pages to publish (assuming single page cover)
+    startPg = 1
     If mainForm.OptionButton1.Value Then
-        startPg = 1
         endPg = Selection.Information(wdNumberOfPagesInDocument)
         pkgStr = "Package"
     ElseIf mainForm.OptionButton2.Value Then
@@ -50,7 +50,6 @@ Sub autoPublish()
         endPg = Selection.Information(wdNumberOfPagesInDocument)
         pkgStr = "Resume"
     ElseIf mainForm.OptionButton3.Value Then
-        startPg = 1
         endPg = 1
         pkgStr = "Cover"
     End If
@@ -75,6 +74,5 @@ Sub autoPublish()
     If mainForm.CheckBox1.Value Then
         ActiveDocument.Close (wdDoNotSaveChanges)
     End If
+    
 End Sub
-
-
